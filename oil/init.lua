@@ -14,7 +14,6 @@ local oil_sounds = {footstep = {name = "oil_oil_footstep", gain = 0.2}}
 local water_source = df_dependencies.node_name_water_source
 local water_flowing = df_dependencies.node_name_water_flowing
 local bucket_empty = df_dependencies.node_name_bucket_empty
-if not core.get_modpath("techage") then
 minetest.register_node("oil:oil_source", {
 	description = S("Oil"),
 	_doc_items_longdesc = oil_desc,
@@ -118,9 +117,6 @@ minetest.register_node("oil:oil_flowing", {
 	_mcl_blast_resistance      = 100,
 	_mcl_hardness              = -1,
 })
-else
-	core.register_alias("techage:oil_source", "oil:oil_source")
-end
 minetest.register_craft({
 	type = "fuel",
 	recipe = "oil:oil_source",
