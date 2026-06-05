@@ -60,25 +60,4 @@ local slade_drill_def = {
 		end	
 	end,
 }
-
-local tnt_boom = df_dependencies.tnt_boom
-if tnt_boom then
-	slade_drill_def.on_use = function(itemstack, user, pointed_thing)
-		if not check_timeout(user) then return end
-		local pos
-		if pointed_thing.type == "node" then pos = pointed_thing.under
-		elseif pointed_thing.type == "object" then pos = pointed_thing.ref:get_pos() end
-		if pos then
-			tnt_boom(pos, {radius=1})
-			minetest.sound_play("dfcaverns_slade_drill", {pos = user:get_pos()})
-			if not minetest.is_creative_enabled(user:get_player_name()) then
-				itemstack:set_wear(itemstack:get_wear()+1)
-			end
-			drill_particles(pos)
-			minetest.check_for_falling({x=pos.x, y=pos.y+1, z=pos.z})
-			return itemstack
-		end
-	end
-end
-
 minetest.register_tool("df_underworld_items:slade_drill", slade_drill_def)
